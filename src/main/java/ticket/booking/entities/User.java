@@ -15,8 +15,3 @@ public class User {
     private String userID;
 
 }
-
-/*
-git config user.name "Adeel Iqbal"
-git config user.email "iadeel26@gmail.com"
- */

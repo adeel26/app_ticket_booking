@@ -7,9 +7,9 @@ import ticket.booking.util.UserServiceUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 
 public class UserBookingService {
 
@@ -30,7 +30,75 @@ public class UserBookingService {
 
     public boolean loginUser() {
         Optional<User> foundUser = userList.stream().filter(user1 -> {
-            return user1.getName().equals(user.getName()) && UserServiceUtil.checkPass
-        })
+            return user1.getName().equalsIgnoreCase(user.getName()) && UserServiceUtil.checkPassword(user.getPassword(), user1.getHashPassword());
+        }).findFirst();
+        return foundUser.isPresent();
     }
+
+    public Boolean signUp(User user1) {
+        try{
+            userList.add(user1);
+            saveUserListToFile();
+            return Boolean.TRUE;
+        } catch (IOException ex) {
+            return Boolean.FALSE;
+        }
+    }
+
+    private void saveUserListToFile() throws IOException{
+        File usersFile = new File(USERS_PATH);
+        objectMapper.writeValue(usersFile, userList);
+    }
+
+    public void fetchBooking() {
+        user.printTickets();
+    }
+
+
+    public boolean cancelBooking(String ticketId) {
+
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter the ticket ID to cancel: ");
+//        String ticketIdInput = scanner.next();
+
+        if (ticketId == null || ticketId.isEmpty()) {
+            System.out.println("Ticket ID cannot be null or empty");
+            return Boolean.FALSE;
+        }
+
+        boolean removed = user.getTicketsBooked().removeIf(ticket -> ticket.getTicketID().equals(ticketId));
+
+        if(removed) {
+            System.out.println("Ticket with ID " + ticketId + " has been cancelled.");
+        } else {
+            System.out.println("No ticket found with ID " + ticketId);
+        }
+
+        return removed;
+    }
+
+
+
 }
+
+
+/*
+
+public boolean loginUser() {
+
+    for(User user1 : userList){
+
+        if(user1.getName().equalsIgnoreCase(user.getName()) &&
+           UserServiceUtil.checkPassword(user.getPassword(), user1.getHashPassword())) {
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+
+
+ */

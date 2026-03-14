@@ -44,6 +44,18 @@ public class App {
                     userBookingService.signUp(userToSignup);
                     break;
                 case 2:
+                    System.out.println("Enter the username to Login");
+                    String nameToLogin = scanner.next();
+                    System.out.println("Enter the password to signup");
+                    String passwordToLogin = scanner.next();
+                    User userToLogin = new User(nameToLogin, passwordToLogin, UserServiceUtil.hashPassword(passwordToLogin), new ArrayList<>(), UUID.randomUUID().toString());
+                    try{
+                        userBookingService = new UserBookingService(userToLogin);
+                    } catch (IOException ex) {
+                        return;
+                    }
+                    break;
+                case 3:
                     
             }
 

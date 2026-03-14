@@ -1,9 +1,14 @@
 package ticket.booking;
 
+import ticket.booking.entities.Train;
+import ticket.booking.entities.User;
 import ticket.booking.services.UserBookingService;
+import ticket.booking.util.UserServiceUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class App {
     public static void main(String[] args) {
@@ -27,6 +32,21 @@ public class App {
             System.out.println("5. Book a Seat");
             System.out.println("6. Cancel my Booking");
             System.out.println("7. Exit the App");
+            option = scanner.nextInt();
+            Train trainSelectedForBooking = new Train();
+            switch (option) {
+                case 1:
+                    System.out.println("Enter the username to signup");
+                    String nameToSignUp = scanner.next();
+                    System.out.println("Enter the password to signup");
+                    String passwordToSignUp = scanner.next();
+                    User userToSignup = new User(nameToSignUp, passwordToSignUp, UserServiceUtil.hashPassword(passwordToSignUp), new ArrayList<>(), UUID.randomUUID().toString());
+                    userBookingService.signUp(userToSignup);
+                    break;
+                case 2:
+                    
+            }
+
         }
 
     }

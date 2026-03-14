@@ -24,6 +24,10 @@ public class Train {
         this.seats = seats;
     }
 
+    public Train() {
+
+    }
+
     public String getTrainId() {
         return this.trainId;
     }

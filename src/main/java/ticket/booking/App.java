@@ -56,7 +56,12 @@ public class App {
                     }
                     break;
                 case 3:
+                    System.out.println("Fetching your bookings");
+                    userBookingService.fetchBooking();
+                    break;
+                case 3:
                     
+
             }
 
         }

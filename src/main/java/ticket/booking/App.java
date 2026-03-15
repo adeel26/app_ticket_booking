@@ -7,6 +7,7 @@ import ticket.booking.util.UserServiceUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -59,8 +60,12 @@ public class App {
                     System.out.println("Fetching your bookings");
                     userBookingService.fetchBooking();
                     break;
-                case 3:
-                    
+                case 4:
+                    System.out.println("Type your source station");
+                    String source = scanner.next();
+                    System.out.println("Type your destination station");
+                    String dest = scanner.next();
+                    List<Train> trains = userBookingService.get
 
             }
 
